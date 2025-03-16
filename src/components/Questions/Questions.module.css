@@ -1,0 +1,33 @@
+.questions{
+    margin: 1rem;
+    outline: greenyellow dotted 1px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    
+}
+
+
+.question{
+    display: flex;
+    flex-direction: column;
+    outline: green dotted 1px;
+}
+
+.question strong{
+    font-size: 1.2rem;
+    margin: 1rem 0;
+}
+
+.answers{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem  0;
+}
+
+.answer label{
+    display: flex;
+    gap : 0.5rem;
+    
+}
+
