@@ -1,11 +1,11 @@
-import Navigation from "../../components/Navigation/Navigation";
 import Categories from "../../components/Categories/Categories";	
+
+import styles from "./../page.module.css";
 
 export default function Home() {
     return (
-        <div>
-            <h1>Flokkar /flokkar</h1>
-            <Navigation/>
+        <div className={styles.main}>
+            <h1>Flokkar</h1>
             <Categories/>
 
         </div>

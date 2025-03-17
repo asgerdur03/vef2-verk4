@@ -3,14 +3,14 @@ import styles from "./Navigation.module.css";
 
 export default function Navigation() {
     return (
-        <div>
+        <div className={styles.container}>
             <nav className={styles.nav}>
-                <ul>
-                    <li><Link href="/">Forsida</Link></li>
-                    <li><Link href="/flokkar">Flokkar</Link></li>
-                    <li><Link href="/edit">Edit</Link></li>
-                </ul>
+                <div className={styles.link}><Link href="/">Forsida</Link></div>
+                <div className={styles.link}><Link href="/flokkar">Flokkar</Link></div>
+                <div className={styles.link}><Link href="/edit">Edit</Link></div>
             </nav>
         </div>
+        
+        
     );
 }

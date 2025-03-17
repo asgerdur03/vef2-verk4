@@ -38,7 +38,6 @@ export default function Categories({title}: Props) {
 
     return (
         <div className={styles.categories}>
-            <h2>hér kemur listi af flokkum</h2>
             <h2>{title}</h2>
 
             {uiState === 'loading' && <p>Sæki flokka</p>}

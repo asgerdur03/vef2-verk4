@@ -1,0 +1,8 @@
+.answer{
+    margin-bottom: 1rem;
+}
+
+.answer label{
+    display: flex;
+    gap: 1rem;
+}

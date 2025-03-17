@@ -18,10 +18,10 @@ nota api frá sýnilausn 3
 - [ ] 10% - Tæki, tól, test, github og hýsing
 
 # Annað
-- [ ] Eslint
-- [ ] Github repo
+- [x] Eslint
+- [x] Github repo
 - [ ] Vercel hýsing
-- [ ] Css allt
+- [x] Css allt
 - [ ] Svarvirkni á spurningar
 - [ ]
 - [ ]
