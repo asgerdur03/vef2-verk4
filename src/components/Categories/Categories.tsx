@@ -34,8 +34,6 @@ export default function Categories({title}: Props) {
         fetchData();
     }, []);
 
-    console.log('categories', categories);
-
     return (
         <div className={styles.categories}>
             <h2>{title}</h2>

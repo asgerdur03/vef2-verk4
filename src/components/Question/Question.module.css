@@ -8,3 +8,37 @@
 .question .questionText{
     font-weight: bold;
 }
+
+.correct {
+    color: green;
+    font-weight: bold;
+}
+
+.wrong {
+    color: red;
+    font-weight: bold;
+}
+
+.answer {
+    margin: 5px 0;
+}
+
+
+.answer{
+    margin-bottom: 1rem;
+}
+
+.answer label{
+    display: flex;
+    gap: 1rem;
+}
+
+.answers{
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem  0;
+}
+
+.answers li{
+    list-style: none;
+}

@@ -1,15 +1,13 @@
 'use client'
 
-import { use, useState } from "react";
-import { Answer, Question as QuestionType, Category, AnswerToCreate , QuestionToCreate} from "@/types";
-import { JSX } from "react";
+import { useState } from "react";
+import { Category, AnswerToCreate , QuestionToCreate} from "@/types";
 import { QuestionsApi } from "@/api";
 import { useEffect } from "react";
-import { json } from "stream/consumers";
 
 export default function QuestionForm(){
     const [questionText, setQuestionText] = useState('');
-    const [categoryId, setCategoryId] = useState<number>();
+    const [categoryId, setCategoryId] = useState<number>(0);
     const [categories, setCategories] = useState<Category[]>([]);
 
     const [answers, setAnswers] = useState<AnswerToCreate[]>([
@@ -35,11 +33,33 @@ export default function QuestionForm(){
     };
     
     const handleCorrectAnswerChange = (index: number) => {
-       setAnswers(answers.map((ans, i) => ({ ...ans, correct: i === index }))); // Only one correct answer
+        setAnswers(answers.map((ans, i) => ({ ...ans, correct: i === index })));
     };
 
     const handleSubmit =async(e: React.FormEvent) => {
         e.preventDefault();
+        const api = new QuestionsApi();
+
+        // error responses
+        if (questionText.length < 3 || questionText.length > 1024) {	
+            alert('Spurninginn verður að vera með minnsta kosti 3 og meira en 1024 stafir');
+            return;
+        }
+
+        if (answers.some((answer) => answer.text.length < 3 || answer.text.length > 1024)) {
+            alert('Svarmöguleikinn verður að vera með minnsta kosti 3 og meira en 1024 stafir');
+            return;
+        }
+
+        if (answers.every((answer) => !answer.correct)) {
+            alert('Veldu rétt svar');
+            return;
+        }
+
+        if (categoryId === 0) {
+            alert('Veldu flokk');
+            return;
+        }
 
         const data: QuestionToCreate = {
             text: questionText,
@@ -47,9 +67,7 @@ export default function QuestionForm(){
             answers: answers
         };
 
-        console.log('data', data);
-        const api = new QuestionsApi();
-        console.log(JSON.stringify(data));
+
         await api.createQuestion(data);
 
     };
@@ -66,7 +84,8 @@ export default function QuestionForm(){
         <div className="flokkur">
             <label>Flokkur </label>
             <select value={categoryId} onChange={(e) => setCategoryId(parseInt(e.target.value))} required>
-                <option value="" disabled>Select a category</option>
+                <option value="0" disabled>Select a category</option>
+
                 {categories.map((category) => (
                     <option key={category.id} value={category.id}>
                         {category.name}
@@ -74,59 +93,32 @@ export default function QuestionForm(){
                 ))}
             </select>
         </div>
-        <label className="block mt-2 font-semibold">Answers:</label>
+        <label>Answers:</label>
 
         {answers.map((answer, index) => (
-        <div key={index} className="flex items-center mt-2">
-          <label className="mr-2">Svarmöguleiki {index + 1}</label>
-          <input
+        <div key={index}>
+            <label>Svarmöguleiki {index + 1}</label>
+            <input
             type="text"
             value={answer.text}
             onChange={(e) => handleAnswerChange(index, e.target.value)}
             className="w-full p-2 border rounded"
             placeholder={`Answer ${index + 1}`}
-          />
-          <input
+            />
+            <input
             type="radio"
             name="correctAnswer"
             checked={answer.correct}
             onChange={() => handleCorrectAnswerChange(index)}
             className="ml-2"
-          />
-          <span className="ml-1">Correct</span>
+            />
+            <span className="ml-1">Correct</span>
         </div>
-      ))}
+        ))}
         
-        <button type="submit">Submit</button>
+        <button type="submit">Búa til spurningu</button>
     </form>
     </div>
 
-
     )
 }
-
-
-/*
-<p>Spurning verður að hafa 4 svarmöguleika, og amk eitt rétt svar</p>
-        <div>
-            <label>Svarmöguleiki 1</label>
-            <input type="text" name="svar1" required/>
-            <input type="checkbox" name="correct" value="1"/>
-        </div>
-        <div>
-            <label>Svarmöguleiki 2</label>
-            <input type="text" name="svar2" required/>
-            <input type="checkbox" name="correct" value="2"/>
-        </div>
-        <div>
-            <label>Svarmöguleiki 3</label>
-            <input type="text" name="svar3" required/>
-            <input type="checkbox" name="correct" value="3"/>
-        </div>
-        <div>
-            <label>Svarmöguleiki 4</label>
-            <input type="text" name="svar4" required/>
-            <input type="checkbox" name="correct" value="4"/>
-        </div>
-
-*/

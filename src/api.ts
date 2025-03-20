@@ -1,19 +1,8 @@
-import { Category, Paginated, Question, Answer, QuestionToCreate} from "./types";
+import { Category, Paginated, Question, QuestionToCreate} from "./types";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ??  "http://localhost:3000"
-
-//"https://vef2-2025-v3-synilausn.onrender.com";
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL ?? "https://vef2-2025-v3-synilausn.onrender.com";
 
 
-/* TODO: 
-- GET questions: til að lista allar spurningar viðeigandi flokks
-
-- Amk eitt eftirfarandi:
-1. POST, PATCH, DELETE categories/:slug
-2. POST questions
-3. PATCH questions/:id
-
-*/
 export class QuestionsApi {
     async fetchFromApi<T>(url: string): Promise<T|null>  {
         let response:Response | undefined;

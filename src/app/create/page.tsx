@@ -1,5 +1,4 @@
 import QuestionForm from "@/components/QuestionForm/QuestionForm";
-import Edit from "../../components/Edit/Edit";
 import styles from "./../page.module.css";
 
 
