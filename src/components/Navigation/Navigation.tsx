@@ -7,7 +7,7 @@ export default function Navigation() {
             <nav className={styles.nav}>
                 <div className={styles.link}><Link href="/">Forsida</Link></div>
                 <div className={styles.link}><Link href="/flokkar">Flokkar</Link></div>
-                <div className={styles.link}><Link href="/edit">Edit</Link></div>
+                <div className={styles.link}><Link href="/create">Create</Link></div>
             </nav>
         </div>
         

@@ -12,26 +12,18 @@ export default function Questions({slug}: {slug: string}) {
     useEffect(() => {
         async function fetchData() {
             const api = new QuestionsApi();
-            const response = await api.getQuestions();
+            //const response = await api.getQuestions();
+            const response = await api.questionsByCategory(slug);
+
             setQuestions(response);
         }
         fetchData();
-    }, []);
+    }, [slug]);
 
     if (!questions) {
-        return <p>Spurningar fannst ekki</p>;
+        return <p>Engar spurningar fundust í þessum flokki</p>;
     }
-
-    const filteredQuestions = questions.data.filter((question) => question.category.slug === slug);
-    if (filteredQuestions.length === 0) {
-        return <p>Engar spurningar fannst</p>;
-    }
-
-    console.log('filteredQuestions', filteredQuestions);
-
-    const show = () => {
-        console.log('show');
-    }
+    const filteredQuestions = questions.data
 
     return(<QuestionList questions={filteredQuestions} />)
 }
