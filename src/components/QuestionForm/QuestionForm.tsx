@@ -70,6 +70,8 @@ export default function QuestionForm(){
 
         await api.createQuestion(data);
 
+        alert('Spurninginn hefur verið bætt við');
+
     };
 
     return (
